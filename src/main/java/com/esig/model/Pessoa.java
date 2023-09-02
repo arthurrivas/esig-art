@@ -19,7 +19,7 @@ public class Pessoa {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Integer id;
 
-	@Column
+	private String nome;
 	private String email;
 	private String usuario;
 	private String cidade;
@@ -37,9 +37,10 @@ public class Pessoa {
 	public Pessoa() {
 	}
 
-	public Pessoa(Integer id, String email, String usuario, String cidade, String cep, String endereco, String pais, Date dataNascimento) {
+	public Pessoa(Integer id, String nome, String email, String usuario, String cidade, String cep, String endereco, String pais, Date dataNascimento) {
 		super();
 		this.id = id;
+		this.nome = nome;
 		this.email = email;
 		this.usuario = usuario;
 		this.cidade = cidade;
@@ -56,6 +57,14 @@ public class Pessoa {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getEmail() {
