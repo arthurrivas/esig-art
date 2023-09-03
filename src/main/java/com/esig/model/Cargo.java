@@ -52,5 +52,13 @@ public class Cargo {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
+	public Set<Vencimento> getVencimentos() {
+		return vencimentos;
+	}
+
+	public void setVencimentos(Set<Vencimento> vencimentos) {
+		this.vencimentos = vencimentos;
+	}
+
 }
