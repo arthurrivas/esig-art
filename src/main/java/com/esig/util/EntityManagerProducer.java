@@ -11,20 +11,19 @@ import javax.persistence.Persistence;
 @ApplicationScoped
 public class EntityManagerProducer {
 
-	
-	private EntityManagerFactory factory;
+    private EntityManagerFactory factory;
 
-	public EntityManagerProducer() {
-		this.factory = Persistence.createEntityManagerFactory("esig-art");
-	}
-	
-	@Produces
-	@RequestScoped
-	public EntityManager createEntity() {
-		return this.factory.createEntityManager();
-	}
-	
-	public void closeEntityManager(@Disposes EntityManager manager) {
-		manager.close();
-	}
+    public EntityManagerProducer() {
+        this.factory = Persistence.createEntityManagerFactory("esig");
+    }
+
+    @Produces
+    @RequestScoped
+    public EntityManager createEntityManager() {
+        return this.factory.createEntityManager();
+    }
+
+    public void closeEntityManager(@Disposes EntityManager manager) {
+        manager.close();
+    }
 }
