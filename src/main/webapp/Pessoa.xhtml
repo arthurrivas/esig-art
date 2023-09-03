@@ -20,6 +20,8 @@
 	</header>
 	
 	<div id="conteudo">
+		<h:button value="Calcular todos" onclick="#{pessoaBean.calculaTodosSalarios()}" />
+	
 		<h:dataTable value="#{pessoaBean.listaPessoas}" var="pessoa" paginator="true" rows="10" paginatorPosition="bottom">
 			<p:column headerText="Nome">
 				<h:outputText value="#{empresa.nome}" />
