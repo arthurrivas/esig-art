@@ -1,36 +1,75 @@
-@charset "utf-8";
+/* Reset CSS para remover margens e preenchimentos padrão */
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
 
+/* Estilo do corpo da página */
 body {
-	font-size: 12px;
-	font-family: Arial, Helvetica, sans-serif;
-	margin: 0px;
-	font-weight: normal
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
 }
 
+/* Estilo do cabeçalho */
 header {
-	padding: 5px;
-	margin-bottom: 20px;
-	height: 30px;
-	background-color: #545454;
-	color: #fff;
-	box-shadow: 0px 2px 2px #ccc
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
 }
 
+/* Estilo do título do cabeçalho */
+header h2 {
+    font-size: 24px;
+}
+
+/* Estilo do conteúdo principal */
 #conteudo {
-	padding: 0px 8px
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Estilo da tabela de dados */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Estilo do rodapé */
 footer {
-	border-top: 1px solid #ccc;
-	padding: 5px 8px;
-	margin-top: 20px;
-	margin-bottom: 10px
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
 }
 
-h1 {
-	font-size: 24px;
-	font-weight: 500;
-	padding: 0px;
-	margin: 0px;
-	margin-bottom: 10px
+/* Estilo do botão */
+button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
 }
+
+/* Estilo do botão quando o
