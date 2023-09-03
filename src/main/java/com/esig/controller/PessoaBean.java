@@ -4,21 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.esig.model.Pessoa;
-import com.esig.repository.PessoaRepository;
+import com.esig.model.PessoaSalario;
+import com.esig.service.PessoaService;
 
 @Named
 @ManagedBean(name="pessoaBean")
-@ViewScoped
+@RequestScoped
 public class PessoaBean {
 	
 	@Inject
-	public PessoaRepository pessoaRepository;
+	private PessoaService pessoaService;
 	
 	private List<Pessoa> listaPessoas = new ArrayList<>();
 	
@@ -31,11 +32,16 @@ public class PessoaBean {
 	}	
 	
 	public List<Pessoa> buscaListaPessoas(){
-		return pessoaRepository.buscarTodasPessoas();
+		return pessoaService.buscarTodasPessoas();
 	}
 	
-	public void calculaTodosSalarios() {
-		// IMPLEMENTS
+	public void clicadoCalculaTodosSalarios() throws InterruptedException {	
+		pessoaService.calcularTodosSalarios();
+		buscaListaPessoas();
+	}
+	
+	public PessoaSalario getUltimoSalario(List<PessoaSalario> salarios) {
+		return pessoaService.getUltimoSalario(salarios);
 	}
 
 	public List<Pessoa> getListaPessoas() {

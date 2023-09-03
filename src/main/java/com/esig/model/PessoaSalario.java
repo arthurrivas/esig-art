@@ -71,5 +71,10 @@ public class PessoaSalario {
 		this.createdAt = createdAt;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "PessoaSalario [id=" + id + ", pessoa=" + pessoa + ", salario=" + salario + ", createdAt=" + createdAt
+				+ "]";
+	}
+
 }
