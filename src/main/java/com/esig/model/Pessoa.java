@@ -1,6 +1,7 @@
 package com.esig.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,6 +23,7 @@ public class Pessoa {
 
 	private String nome;
 	private String email;
+	private String telefone;
 	private String usuario;
 	private String cidade;
 	private String cep;
@@ -34,14 +37,18 @@ public class Pessoa {
     @JoinColumn(name = "cargo_id")
     private Cargo parent;
 	
+	@OneToMany(mappedBy = "pessoa")
+    private List<PessoaSalario> salarios;
+	
 	public Pessoa() {
 	}
 
-	public Pessoa(Integer id, String nome, String email, String usuario, String cidade, String cep, String endereco, String pais, Date dataNascimento) {
+	public Pessoa(Integer id, String nome, String email, String telefone, String usuario, String cidade, String cep, String endereco, String pais, Date dataNascimento) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
+		this.telefone = telefone;
 		this.usuario = usuario;
 		this.cidade = cidade;
 		this.cep = cep;
@@ -73,6 +80,14 @@ public class Pessoa {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
 	public String getUsuario() {
@@ -121,6 +136,14 @@ public class Pessoa {
 
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
-	}	
+	}
+
+	public List<PessoaSalario> getSalarios() {
+		return salarios;
+	}
+
+	public void setSalarios(List<PessoaSalario> salarios) {
+		this.salarios = salarios;
+	}
 	
 }
