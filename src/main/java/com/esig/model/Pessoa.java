@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,9 +36,9 @@ public class Pessoa {
 	
 	@ManyToOne
     @JoinColumn(name = "cargo_id")
-    private Cargo parent;
+    private Cargo cargo;
 	
-	@OneToMany(mappedBy = "pessoa")
+	@OneToMany(mappedBy = "pessoa", fetch = FetchType.EAGER)
     private List<PessoaSalario> salarios;
 	
 	public Pessoa() {
@@ -56,7 +57,6 @@ public class Pessoa {
 		this.pais = pais;
 		this.dataNascimento = dataNascimento;
 	}
-
 
 	public Integer getId() {
 		return id;
@@ -138,6 +138,14 @@ public class Pessoa {
 		this.dataNascimento = dataNascimento;
 	}
 
+	public Cargo getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(Cargo cargo) {
+		this.cargo = cargo;
+	}
+
 	public List<PessoaSalario> getSalarios() {
 		return salarios;
 	}
@@ -145,5 +153,11 @@ public class Pessoa {
 	public void setSalarios(List<PessoaSalario> salarios) {
 		this.salarios = salarios;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Pessoa [id=" + id + ", nome=" + nome + ", email=" + email + ", telefone=" + telefone + ", usuario="
+				+ usuario + ", cidade=" + cidade + ", cep=" + cep + ", endereco=" + endereco + ", pais=" + pais
+				+ ", dataNascimento=" + dataNascimento + ", cargo=" + cargo + ", salarios=" + salarios + "]";
+	}
 }
