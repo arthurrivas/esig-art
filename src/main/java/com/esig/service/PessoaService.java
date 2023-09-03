@@ -1,17 +1,19 @@
 package com.esig.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
+import com.esig.model.Pessoa;
 import com.esig.repository.PessoaRepository;
-import com.esig.util.Transacional;
 
 public class PessoaService {
 
 	@Inject
 	private PessoaRepository pessoaRepository;
 	
-	public void buscarTodasPessoas() {
-		pessoaRepository.buscarTodasPessoas();
+	public List<Pessoa> buscarTodasPessoas() {
+		return pessoaRepository.buscarTodasPessoas();
 	}
 	
 }
