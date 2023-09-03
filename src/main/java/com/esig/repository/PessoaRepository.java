@@ -14,10 +14,13 @@ public class PessoaRepository {
 	
 	@Inject
 	private EntityManager manager;
-
+	
 	public PessoaRepository() {}
 	
-	
+	public PessoaRepository(EntityManager manager) {
+		this.manager = manager;
+	}
+
 	public List<Pessoa> buscarTodasPessoas() {
         CriteriaBuilder cb = manager.getCriteriaBuilder();
         CriteriaQuery<Pessoa> query = cb.createQuery(Pessoa.class);
@@ -28,4 +31,8 @@ public class PessoaRepository {
         return manager.createQuery(query).getResultList();
     }
 	
+	public void calcularSalario() {
+        
+		
+    }
 }
