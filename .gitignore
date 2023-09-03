@@ -1,32 +1,43 @@
-# Compiled class file
-*.class
+# Eclipse
+.metadata/
+.classpath
+.project
+.settings/
 
-# Log file
+# Maven
+target/
+*.iml
+
+# Gradle
+build/
+.gradle/
+
+# IntelliJ IDEA
+.idea/
+
+# NetBeans
+nbproject/private/
+build/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Logs
 *.log
+log/
 
-# BlueJ files
-*.ctxt
+# Temporary files
+*.tmp
+*.swp
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# Compiled Java classes
+*.class
 
 # Package Files #
 *.jar
 *.war
-*.nar
 *.ear
-*.zip
-*.tar.gz
-*.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
-.settings/org.eclipse.jdt.apt.core.prefs
-.settings/org.eclipse.jdt.core.prefs
-.classpath
-
-.project
-.settings/org.eclipse.jdt.core.prefs
-target/classes/META-INF/maven/br.com.esig-art/esig-art/pom.properties
-.project
+# Bytecode directories
+bin/
