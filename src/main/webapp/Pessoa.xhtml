@@ -14,49 +14,54 @@
 </h:head>
 
 <h:body>
-	<header>
-		<h2>Listagem pessoas</h2>
-	</header>
+	<h:form>
+		<header>
+			<h2>Listagem pessoas</h2>
+		</header>
 
-	<div id="conteudo">
-		<h:button value="Calcular todos"
-			onclick="#{pessoaBean.clicadoCalculaTodosSalarios()}" />
+		<div id="conteudo">
+			<p:inputText id="termoPesquisa" placeholder="Busca pelo nome"
+				value="#{pessoaBean.termoPesquisa}" />
+			<p:commandButton actionListener="#{pessoaBean.buscaPessoa}"
+				icon="fa fa-search" value="Buscar" update="tabelaPessoas">
+				<f:ajax event="click" listener="#{pessoaBean.buscaPessoa}" />
+			</p:commandButton>
 
-		<h:dataTable value="#{pessoaBean.listaPessoas}" var="pessoa"
-			paginator="true" paginatorPosition="bottom">
-			<p:column headerText="Nome">
-				<f:facet name="header">
-					Salario
-				</f:facet>
-				<h:outputText value="#{pessoa.nome}" />
-			</p:column>
+			<p:commandButton value="Calcular todos"
+				actionListener="#{pessoaBean.clicadoCalculaTodosSalarios}" 
+				update="tabelaPessoas"	
+			/>
 
-			<p:column headerText="Email">
-				<f:facet name="header">
-					Salario
-				</f:facet>
-				<h:outputText value="#{pessoa.email}" />
-			</p:column>
+			<p:dataTable id="tabelaPessoas" value="#{pessoaBean.listaPessoas}"
+				var="pessoa" rowKey="pessoa.id" paginator="true" rows="20"
+				paginatorPosition="bottom">
 
-			<p:column headerText="Usuario">
-				<f:facet name="header">
-					Salario
-				</f:facet>
-				<h:outputText value="#{pessoa.usuario}" />
-			</p:column>
+				<p:ajax event="page" update="tabelaPessoas"/>
+				<p:ajax event="sort" update="tabelaPessoas" />
 
-			<p:column headerText="Salario">
-				<f:facet name="header">
-					Salario
-				</f:facet>
-				<h:outputText
-					value="#{pessoaBean.getUltimoSalario(pessoa.salarios).salario}" />
-			</p:column>
+				<p:column headerText="Nome" sortBy="#{pessoa.nome}">
+					<h:outputText value="#{pessoa.nome}" />
+				</p:column>
 
-		</h:dataTable>
-	</div>
+				<p:column headerText="Email">
+					<h:outputText value="#{pessoa.email}" />
+				</p:column>
 
-	<footer> Curso online "JSF e PrimeFaces Essencial" </footer>
+				<p:column headerText="Cargo">
+					<h:outputText value="#{pessoa.cargo.nome}" />
+				</p:column>
+
+				<p:column headerText="Salario">
+					<h:outputText
+						title="Atualizado em #{pessoaBean.getUltimoSalario(pessoa.salarios).createdAt}"
+						value="#{pessoaBean.getUltimoSalario(pessoa.salarios).salario}" />
+				</p:column>
+
+			</p:dataTable>
+		</div>
+
+		<footer></footer>
+	</h:form>
 </h:body>
 
 </html>
