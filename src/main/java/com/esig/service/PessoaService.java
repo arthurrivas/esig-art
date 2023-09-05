@@ -7,6 +7,11 @@ import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import com.esig.model.Pessoa;
 import com.esig.model.PessoaSalario;
@@ -23,9 +28,13 @@ public class PessoaService {
 	private PessoaSalarioService psService;
 	
 	public List<Pessoa> buscarTodasPessoas() {
-		return pessoaRepository.buscarTodasPessoas();
+		List<Pessoa> pessoas = pessoaRepository.buscarTodasPessoas();
+		return pessoas;
 	}
 	
+	public List<Pessoa> buscaPorNome(String nome) {
+		return pessoaRepository.buscaPorPessoa(nome);
+	}
 	public void calcularTodosSalarios() {
 		List<Pessoa> pessoas = this.buscarTodasPessoas();
 		List<PessoaSalario> pessoasSalarios = new ArrayList<>();
@@ -57,8 +66,6 @@ public class PessoaService {
 		
 		return sortedSalarios.isEmpty() ? new PessoaSalario() : salarios.get(0);
 		
-		
 	}
-	
 	
 }

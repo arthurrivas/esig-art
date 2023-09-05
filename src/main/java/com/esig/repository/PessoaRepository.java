@@ -4,8 +4,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import com.esig.model.Pessoa;
@@ -31,8 +33,20 @@ public class PessoaRepository {
         return manager.createQuery(query).getResultList();
     }
 	
-	public void calcularSalario() {
-        
+	public List<Pessoa> buscaPorPessoa(String nome){
 		
-    }
+		CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
+		CriteriaQuery<Pessoa> criteriaQuery = criteriaBuilder.createQuery(Pessoa.class);
+		Root<Pessoa> root = criteriaQuery.from(Pessoa.class);
+		Predicate predicate = criteriaBuilder.like(
+				criteriaBuilder.lower(root.get("nome")), 
+				("%"+ nome +"%").toLowerCase()
+		);
+		criteriaQuery.where(predicate);
+		criteriaQuery.select(root);
+		TypedQuery<Pessoa> query = manager.createQuery(criteriaQuery);
+		
+		return query.getResultList();
+
+	}
 }

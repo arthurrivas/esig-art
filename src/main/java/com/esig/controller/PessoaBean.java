@@ -22,22 +22,35 @@ public class PessoaBean {
 	private PessoaService pessoaService;
 	
 	private List<Pessoa> listaPessoas = new ArrayList<>();
+	private String termoPesquisa;
 	
 	public PessoaBean(){
 	}
 	
 	@PostConstruct
 	public void onCreated() {
-		setListaPessoas(buscaListaPessoas());		
-	}	
+		buscaPessoa();
+	}		
 	
-	public List<Pessoa> buscaListaPessoas(){
-		return pessoaService.buscarTodasPessoas();
+	public void buscaPessoa() {
+		if ((termoPesquisa != null && !termoPesquisa.isEmpty())) {
+			buscaPessoaPorNome();
+		} else {
+			buscaTodasPessoas();
+		}
 	}
 	
-	public void clicadoCalculaTodosSalarios() throws InterruptedException {	
+	public void buscaTodasPessoas() {
+		setListaPessoas(pessoaService.buscarTodasPessoas());
+	}
+	
+	public void buscaPessoaPorNome() {
+		setListaPessoas(pessoaService.buscaPorNome(termoPesquisa));
+	}
+	
+	public void clicadoCalculaTodosSalarios() {	
 		pessoaService.calcularTodosSalarios();
-		buscaListaPessoas();
+		buscaPessoaPorNome();
 	}
 	
 	public PessoaSalario getUltimoSalario(List<PessoaSalario> salarios) {
@@ -51,5 +64,12 @@ public class PessoaBean {
 	public void setListaPessoas(List<Pessoa> listaPessoas) {
 		this.listaPessoas = listaPessoas;
 	}
-	
+
+	public String getTermoPesquisa() {
+		return termoPesquisa;
+	}
+
+	public void setTermoPesquisa(String termoBusca) {
+		this.termoPesquisa = termoBusca;
+	}
 }
