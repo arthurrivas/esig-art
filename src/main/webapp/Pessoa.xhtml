@@ -91,7 +91,7 @@
 
 			<p:defaultCommand target="salvarPessoa" />
 			
-			<h:panelGrid columns="2" rendered="#{not empty pessoaBean.pessoa}">
+			<h:panelGrid id="pessoaGrid" columns="2" rendered="#{not empty pessoaBean.pessoa}">
 			
 				<p:outputLabel value="Nome" for="nome" />
 				<p:inputText id="nome" value="#{pessoaBean.pessoa.nome}" size="80"
@@ -113,12 +113,11 @@
 				</p:selectOneMenu>
 
 				<p:outputLabel value="Telefone" for="telefone" />
-				<p:inputText id="telefone" value="#{pessoaBean.pessoa.telefone}"
-					size="80" maxlength="120" />
+				<p:inputMask id="telefone" mask="(99) 99999-9999" value="#{pessoaBean.pessoa.telefone}"
+					/>
 
 				<p:outputLabel value="Cep" for="cep" />
-				<p:inputText id="cep" value="#{pessoaBean.pessoa.cep}" size="80"
-					maxlength="120" />
+				<p:inputMask mask="99999-999" id="cep" value="#{pessoaBean.pessoa.cep}" />
 
 				<p:outputLabel value="Endereco" for="endereco" />
 				<p:inputText id="endereco" value="#{pessoaBean.pessoa.endereco}"
@@ -136,14 +135,16 @@
 				<p:calendar id="dataNascimento"
 					value="#{pessoaBean.pessoa.dataNascimento}" size="80"
 					maxlength="120" />
+					
+					
+				<p:commandButton id="salvarPessoa" value="Salvar"
+					actionListener="#{pessoaBean.salvarPessoa}"
+					update="tabelaPessoas pessoaGrid" process="dialog"
+					oncomplete="if (!args.validationFailed) PF('dialogWidget').hide()">
+
+				</p:commandButton>
 			</h:panelGrid>
 			
-			<p:commandButton id="salvarPessoa" value="Salvar"
-				actionListener="#{pessoaBean.salvarPessoa}"
-				update="tabelaPessoas"
-				process="dialog"
-				oncomplete="if (!args.validationFailed) PF('dialogWidget').hide()"
-				/>
 		</p:dialog>
 
 		<footer></footer>

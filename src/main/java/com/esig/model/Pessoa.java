@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -29,17 +30,21 @@ public class Pessoa implements Serializable {
 	
 	@NotEmpty
 	private String nome;
+	@NotEmpty
 	private String email;
 	private String telefone;
+	@NotEmpty
 	private String usuario;
 	private String cidade;
 	private String cep;
 	private String endereco;
 	private String pais;
-
+	
+	@Past
 	@Column(name = "data_nascimento")
 	private Date dataNascimento;
 	
+	@NotEmpty
 	@ManyToOne
     @JoinColumn(name = "cargo_id")
     private Cargo cargo;
