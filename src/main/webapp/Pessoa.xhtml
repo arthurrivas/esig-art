@@ -35,6 +35,7 @@
 			update="dialog"
 			process="@this"
 		>
+		<p:resetInput target="dialog" />
 		</p:commandButton>
 		<p:commandButton id="editButton" value="Editar"
 			disabled="#{empty pessoaBean.pessoa}"
@@ -113,7 +114,7 @@
 				</p:selectOneMenu>
 
 				<p:outputLabel value="Telefone" for="telefone" />
-				<p:inputMask id="telefone" mask="(99) 99999-9999" value="#{pessoaBean.pessoa.telefone}"
+				<p:inputMask id="telefone" mask="(99) 9999-9999" value="#{pessoaBean.pessoa.telefone}"
 					/>
 
 				<p:outputLabel value="Cep" for="cep" />
