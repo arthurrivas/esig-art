@@ -3036,3 +3036,8 @@ INSERT INTO "pessoa" ("id", "nome", "cidade", "email", "cep", "endereco", "pais"
 INSERT INTO "pessoa" ("id", "nome", "cidade", "email", "cep", "endereco", "pais", "usuario", "telefone", "cargo_id", "data_nascimento") VALUES ('2998', 'Emily Goncalves', 'Rio Grande do Sul', 'EmilyCorreiaGoncalves@cuvox.de', '93295-150', 'Rua Euclides da Cunha 1947', 'Brazil', 'Crum1948', '(51) 9097-9518', '5', '1948-07-11');
 INSERT INTO "pessoa" ("id", "nome", "cidade", "email", "cep", "endereco", "pais", "usuario", "telefone", "cargo_id", "data_nascimento") VALUES ('2999', 'Joao Lima', 'São Paulo', 'JoaoMartinsLima@einrot.com', '08275-690', 'Rua Orestes Credidio 653', 'Brazil', 'Bettpou', '(11) 7435-2518', '1', '1974-08-10');
 INSERT INTO "pessoa" ("id", "nome", "cidade", "email", "cep", "endereco", "pais", "usuario", "telefone", "cargo_id", "data_nascimento") VALUES ('3000', 'Arthur Cunha', 'Goiás', 'ArthurAlvesCunha@fleckens.hu', '74927-019', 'Rua Padre Roque Continillo 1061', 'Brazil', 'Acep1989', '(62) 8318-6466', '5', '1989-11-10');
+
+
+ALTER SEQUENCE hibernate_sequence RESTART WITH 3001;
+
+
