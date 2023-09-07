@@ -29,7 +29,15 @@ public class PessoaRepository implements Serializable {
 		manager.merge(pessoa);
 	}
 	
+	public Pessoa buscaPorId(Integer id) {
+		return manager.find(Pessoa.class, id);
+	}
 	
+	public void deletar(Pessoa pessoa) {
+		pessoa = buscaPorId(pessoa.getId());
+		manager.remove(pessoa);
+		
+	}
 	
 	
 	public List<Pessoa> buscarTodasPessoas() {

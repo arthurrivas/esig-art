@@ -2,7 +2,6 @@ package com.esig.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -45,6 +44,13 @@ public class PessoaBean implements Serializable {
 	
 	public void salvarPessoa() {
 		pessoaService.salvar(pessoa);
+		if (foiFeitoPesquisa()) buscaPessoa();
+	}
+	
+	public void deletarPessoa() {
+		pessoaService.deletar(pessoa);
+		resetPessoa();	
+		buscaPessoa();
 	}
 	
 	public void resetPessoa() {
@@ -74,6 +80,10 @@ public class PessoaBean implements Serializable {
 	public void clicadoCalculaTodosSalarios() {	
 		pessoaService.calcularTodosSalarios();
 		buscaPessoaPorNome();
+	}
+	
+	public boolean foiFeitoPesquisa() {
+		return listaPessoas.size() > 0;
 	}
 	
 	public PessoaSalario getUltimoSalario(List<PessoaSalario> salarios) {

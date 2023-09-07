@@ -45,6 +45,16 @@
 			>
 			<p:resetInput target="dialog" />
 		</p:commandButton>
+		
+		<p:commandButton id="deleteButton" value="Deletar"
+			actionListener="#{pessoaBean.deletarPessoa}"
+			disabled="#{empty pessoaBean.pessoa}"
+			update="tabelaPessoas"
+			process="@this"
+			immediate="true"
+			>
+
+		</p:commandButton>
 
 		<p:dataTable id="tabelaPessoas" value="#{pessoaBean.listaPessoas}"
 			var="pessoa" paginator="true" rows="20"
@@ -53,7 +63,8 @@
 
 			<p:ajax event="page" update="tabelaPessoas" />
 			<p:ajax event="sort" update="tabelaPessoas" />
-			<p:ajax event="rowSelect" update="frm:editButton" />
+			<p:ajax event="rowSelect" update="frm:editButton frm:deleteButton" />
+			<p:ajax event="rowUnselect" update="frm:editButton frm:deleteButton" />
 
 			<p:column headerText="Nome" sortBy="#{pessoa.nome}">
 				<h:outputText value="#{pessoa.nome}" />

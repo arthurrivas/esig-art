@@ -30,6 +30,11 @@ public class PessoaService implements Serializable {
 		pessoaRepository.salvar(pessoa);
 	}
 	
+	@Transacional
+	public void deletar(Pessoa pessoa) {
+		pessoaRepository.deletar(pessoa);
+	}
+	
 	public List<Pessoa> buscarTodasPessoas() {
 		List<Pessoa> pessoas = pessoaRepository.buscarTodasPessoas();
 		return pessoas;

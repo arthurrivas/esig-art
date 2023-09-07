@@ -10,7 +10,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import com.esig.model.Cargo;
-import com.esig.model.Pessoa;
 
 public class CargoRepository implements Serializable {
 	private static final long serialVersionUID = 1L;
