@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -44,12 +45,11 @@ public class Pessoa implements Serializable {
 	@Column(name = "data_nascimento")
 	private Date dataNascimento;
 	
-	@NotEmpty
 	@ManyToOne
     @JoinColumn(name = "cargo_id")
     private Cargo cargo;
 	
-	@OneToMany(mappedBy = "pessoa", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "pessoa", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<PessoaSalario> salarios;
 	
 	public Pessoa() {
