@@ -1,9 +1,11 @@
 package com.esig.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,14 +16,15 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class Cargo {
+public class Cargo implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Integer id;
 	private String nome;
 	
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(
         name = "cargo_vencimento",
         joinColumns = @JoinColumn(name = "cargo_id"),
@@ -61,4 +64,9 @@ public class Cargo {
 		this.vencimentos = vencimentos;
 	}
 
+	@Override
+	public String toString() {
+		return "Cargo [id=" + id + ", nome=" + nome + ", vencimentos=" + vencimentos + "]";
+	}
+	
 }

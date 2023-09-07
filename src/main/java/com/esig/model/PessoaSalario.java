@@ -1,5 +1,6 @@
 package com.esig.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -14,8 +15,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "pessoa_salario")
-public class PessoaSalario {
-
+public class PessoaSalario implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE )
 	private Long id;

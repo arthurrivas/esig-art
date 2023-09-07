@@ -1,5 +1,6 @@
 package com.esig.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
@@ -12,7 +13,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class Vencimento {
+public class Vencimento implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)

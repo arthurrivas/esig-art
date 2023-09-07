@@ -1,5 +1,6 @@
 package com.esig.repository;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -12,7 +13,8 @@ import javax.persistence.criteria.Root;
 
 import com.esig.model.Pessoa;
 
-public class PessoaRepository {
+public class PessoaRepository implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	@Inject
 	private EntityManager manager;
@@ -23,6 +25,13 @@ public class PessoaRepository {
 		this.manager = manager;
 	}
 
+	public void salvar(Pessoa pessoa) {
+		manager.merge(pessoa);
+	}
+	
+	
+	
+	
 	public List<Pessoa> buscarTodasPessoas() {
         CriteriaBuilder cb = manager.getCriteriaBuilder();
         CriteriaQuery<Pessoa> query = cb.createQuery(Pessoa.class);
