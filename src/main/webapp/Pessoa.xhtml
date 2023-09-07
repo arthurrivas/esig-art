@@ -14,51 +14,126 @@
 </h:head>
 
 <h:body>
-	<h:form>
+	<h:form id="frm">
 		<header>
 			<h2>Listagem pessoas</h2>
 		</header>
+		
+		<p:inputText id="termoPesquisa" placeholder="Busca pelo nome"
+			value="#{pessoaBean.termoPesquisa}" />
+		<p:commandButton actionListener="#{pessoaBean.buscaPessoa}"
+			icon="fa fa-search" value="Buscar" update="tabelaPessoas">
+			<f:ajax event="click" listener="#{pessoaBean.buscaPessoa}" />
+		</p:commandButton>
 
-		<div id="conteudo">
-			<p:inputText id="termoPesquisa" placeholder="Busca pelo nome"
-				value="#{pessoaBean.termoPesquisa}" />
-			<p:commandButton actionListener="#{pessoaBean.buscaPessoa}"
-				icon="fa fa-search" value="Buscar" update="tabelaPessoas">
-				<f:ajax event="click" listener="#{pessoaBean.buscaPessoa}" />
-			</p:commandButton>
+		<p:commandButton value="Calcular todos"
+			actionListener="#{pessoaBean.clicadoCalculaTodosSalarios}"
+			update="tabelaPessoas" />
+		<p:commandButton value="adicionar"
+			actionListener="#{pessoaBean.resetPessoa}"
+			oncomplete="PF('dialogWidget').show()"
+			update="dialog"
+			process="@this"
+		>
+		</p:commandButton>
+		<p:commandButton id="editButton" value="Editar"
+			disabled="#{empty pessoaBean.pessoa}"
+			oncomplete="PF('dialogWidget').show()"
+			update="dialog"
+			process="@this"
+			immediate="true"
+			>
+			<p:resetInput target="dialog" />
+		</p:commandButton>
 
-			<p:commandButton value="Calcular todos"
-				actionListener="#{pessoaBean.clicadoCalculaTodosSalarios}" 
-				update="tabelaPessoas"	
-			/>
+		<p:dataTable id="tabelaPessoas" value="#{pessoaBean.listaPessoas}"
+			var="pessoa" paginator="true" rows="20"
+			paginatorPosition="bottom" selectionMode="single"
+			selection="#{pessoaBean.pessoa}" rowKey="#{pessoa.id}">
 
-			<p:dataTable id="tabelaPessoas" value="#{pessoaBean.listaPessoas}"
-				var="pessoa" rowKey="pessoa.id" paginator="true" rows="20"
-				paginatorPosition="bottom">
+			<p:ajax event="page" update="tabelaPessoas" />
+			<p:ajax event="sort" update="tabelaPessoas" />
+			<p:ajax event="rowSelect" update="frm:editButton" />
 
-				<p:ajax event="page" update="tabelaPessoas"/>
-				<p:ajax event="sort" update="tabelaPessoas" />
+			<p:column headerText="Nome" sortBy="#{pessoa.nome}">
+				<h:outputText value="#{pessoa.nome}" />
+			</p:column>
 
-				<p:column headerText="Nome" sortBy="#{pessoa.nome}">
-					<h:outputText value="#{pessoa.nome}" />
-				</p:column>
+			<p:column headerText="Email">
+				<h:outputText value="#{pessoa.email}" />
+			</p:column>
 
-				<p:column headerText="Email">
-					<h:outputText value="#{pessoa.email}" />
-				</p:column>
+			<p:column headerText="Cargo">
+				<h:outputText value="#{pessoa.cargo.nome}" />
+			</p:column>
 
-				<p:column headerText="Cargo">
-					<h:outputText value="#{pessoa.cargo.nome}" />
-				</p:column>
+			<p:column headerText="Salario">
+				<h:outputText
+					title="Atualizado em #{pessoaBean.getUltimoSalario(pessoa.salarios).createdAt}"
+					value="#{pessoaBean.getUltimoSalario(pessoa.salarios).salario}" />
+			</p:column>
 
-				<p:column headerText="Salario">
-					<h:outputText
-						title="Atualizado em #{pessoaBean.getUltimoSalario(pessoa.salarios).createdAt}"
-						value="#{pessoaBean.getUltimoSalario(pessoa.salarios).salario}" />
-				</p:column>
+		</p:dataTable>
 
-			</p:dataTable>
-		</div>
+		<p:dialog id="dialog" header="SALVAR PESSOA" widgetVar="dialogWidget"
+			modal="true" closeOnEscape="true" resizable="false">
+
+			<p:defaultCommand target="salvarPessoa" />
+			
+			<h:panelGrid columns="2" rendered="#{not empty pessoaBean.pessoa}">
+			
+				<p:outputLabel value="Nome" for="nome" />
+				<p:inputText id="nome" value="#{pessoaBean.pessoa.nome}" size="80"
+					maxlength="120" />
+
+				<p:outputLabel value="Email" for="email" />
+				<p:inputText id="email" value="#{pessoaBean.pessoa.email}" size="80"
+					maxlength="120" />
+
+				<p:outputLabel value="Usuario" for="usuario" />
+				<p:inputText id="usuario" value="#{pessoaBean.pessoa.usuario}"
+					size="80" maxlength="120" />
+
+				<p:outputLabel value="Cargo" for="cargo" />
+				<p:selectOneMenu id="cargo"  converter="#{pessoaBean.cargoConverter}"
+					value="#{pessoaBean.pessoa.cargo}">
+					<f:selectItems value="#{pessoaBean.listaCargos}" var="cargoPessoa"
+						itemLabel="#{cargoPessoa.nome}" itemValue="#{cargoPessoa}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Telefone" for="telefone" />
+				<p:inputText id="telefone" value="#{pessoaBean.pessoa.telefone}"
+					size="80" maxlength="120" />
+
+				<p:outputLabel value="Cep" for="cep" />
+				<p:inputText id="cep" value="#{pessoaBean.pessoa.cep}" size="80"
+					maxlength="120" />
+
+				<p:outputLabel value="Endereco" for="endereco" />
+				<p:inputText id="endereco" value="#{pessoaBean.pessoa.endereco}"
+					size="80" maxlength="120" />
+
+				<p:outputLabel value="Cidade" for="cidade" />
+				<p:inputText id="cidade" value="#{pessoaBean.pessoa.cidade}"
+					size="80" maxlength="120" />
+
+				<p:outputLabel value="Pais" for="pais" />
+				<p:inputText id="pais" value="#{pessoaBean.pessoa.pais}" size="80"
+					maxlength="120" />
+
+				<p:outputLabel value="Data Nascimento" for="dataNascimento" />
+				<p:calendar id="dataNascimento"
+					value="#{pessoaBean.pessoa.dataNascimento}" size="80"
+					maxlength="120" />
+			</h:panelGrid>
+			
+			<p:commandButton id="salvarPessoa" value="Salvar"
+				actionListener="#{pessoaBean.salvarPessoa}"
+				update="tabelaPessoas"
+				process="dialog"
+				oncomplete="if (!args.validationFailed) PF('dialogWidget').hide()"
+				/>
+		</p:dialog>
 
 		<footer></footer>
 	</h:form>
